@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- OWASP MASVS: Disable cleartext HTTP traffic across entire app -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Pin-set for Production & Flavor API Domains -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">marketplace.enterprise.com</domain>
+        <pin-set expiration="2027-12-31">
+            <!-- Primary & Backup Certificate SPKI SHA-256 Hashes -->
+            <pin digest="SHA-256">WoiWRyIOVNa9ihaIhR+mbJ7UhBCwbq0cgFjlTt97BRU=</pin>
+            <pin digest="SHA-256">r/mItsNd4etnmK+xmAYsFcYbkTLPXeiYSBWCGGW1304=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>

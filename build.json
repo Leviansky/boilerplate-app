@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "project_name": "testing_boilerplate",
+  "version": "1.0.0",
+  "description": "Enterprise Build Matrix Configuration for Android & iOS across Development, Staging, and Production environments.",
+  "environments": {
+    "development": {
+      "name": "development",
+      "flavor": "development",
+      "entrypoint": "lib/main_development.dart",
+      "base_url": "https://dev-api.marketplace.enterprise.com",
+      "logging_enabled": true,
+      "debug_banner": true,
+      "dart_defines": {
+        "APP_ENV": "development",
+        "BASE_URL": "https://dev-api.marketplace.enterprise.com",
+        "API_VERSION": "v1",
+        "APP_VERSION": "1.0.0"
+      },
+      "android": {
+        "flavor": "development",
+        "application_id": "com.example.testing_boilerplate.dev",
+        "app_name": "Marketplace Dev",
+        "targets": {
+          "apk_debug": {
+            "type": "apk",
+            "build_mode": "debug",
+            "command": "flutter build apk --flavor development -t lib/main_development.dart --debug",
+            "output_file": "build/app/outputs/flutter-apk/app-development-debug.apk"
+          },
+          "apk_release": {
+            "type": "apk",
+            "build_mode": "release",
+            "command": "flutter build apk --flavor development -t lib/main_development.dart --release",
+            "output_file": "build/app/outputs/flutter-apk/app-development-release.apk"
+          }
+        }
+      },
+      "ios": {
+        "flavor": "development",
+        "scheme": "development",
+        "bundle_id": "com.example.testingBoilerplate.dev",
+        "app_name": "Marketplace Dev",
+        "targets": {
+          "simulator": {
+            "type": "app",
+            "build_mode": "debug",
+            "command": "flutter build ios --flavor development -t lib/main_development.dart --simulator --debug",
+            "output_dir": "build/ios/iphonesimulator/Runner.app"
+          },
+          "device_debug": {
+            "type": "app",
+            "build_mode": "debug",
+            "command": "flutter build ios --flavor development -t lib/main_development.dart --no-codesign --debug",
+            "output_dir": "build/ios/iphoneos/Runner.app"
+          }
+        }
+      }
+    },
+    "staging": {
+      "name": "staging",
+      "flavor": "staging",
+      "entrypoint": "lib/main_staging.dart",
+      "base_url": "https://stg-api.marketplace.enterprise.com",
+      "logging_enabled": true,
+      "debug_banner": true,
+      "dart_defines": {
+        "APP_ENV": "staging",
+        "BASE_URL": "https://stg-api.marketplace.enterprise.com",
+        "API_VERSION": "v1",
+        "APP_VERSION": "1.0.0"
+      },
+      "android": {
+        "flavor": "staging",
+        "application_id": "com.example.testing_boilerplate.stg",
+        "app_name": "Marketplace Staging",
+        "targets": {
+          "apk": {
+            "type": "apk",
+            "build_mode": "release",
+            "command": "flutter build apk --flavor staging -t lib/main_staging.dart --release",
+            "output_file": "build/app/outputs/flutter-apk/app-staging-release.apk"
+          },
+          "appbundle": {
+            "type": "appbundle",
+            "build_mode": "release",
+            "command": "flutter build appbundle --flavor staging -t lib/main_staging.dart --release",
+            "output_file": "build/app/outputs/bundle/stagingRelease/app-staging-release.aab"
+          }
+        }
+      },
+      "ios": {
+        "flavor": "staging",
+        "scheme": "staging",
+        "bundle_id": "com.example.testingBoilerplate.stg",
+        "app_name": "Marketplace Staging",
+        "targets": {
+          "ipa": {
+            "type": "ipa",
+            "build_mode": "release",
+            "command": "flutter build ipa --flavor staging -t lib/main_staging.dart --release",
+            "output_dir": "build/ios/ipa"
+          }
+        }
+      }
+    },
+    "production": {
+      "name": "production",
+      "flavor": "production",
+      "entrypoint": "lib/main_production.dart",
+      "base_url": "https://api.marketplace.enterprise.com",
+      "logging_enabled": false,
+      "debug_banner": false,
+      "dart_defines": {
+        "APP_ENV": "production",
+        "BASE_URL": "https://api.marketplace.enterprise.com",
+        "API_VERSION": "v1",
+        "APP_VERSION": "1.0.0"
+      },
+      "android": {
+        "flavor": "production",
+        "application_id": "com.example.testing_boilerplate",
+        "app_name": "Marketplace Enterprise",
+        "targets": {
+          "apk": {
+            "type": "apk",
+            "build_mode": "release",
+            "obfuscate": true,
+            "split_debug_info": "build/app/outputs/symbols",
+            "command": "flutter build apk --flavor production -t lib/main_production.dart --release --obfuscate --split-debug-info=build/app/outputs/symbols",
+            "output_file": "build/app/outputs/flutter-apk/app-production-release.apk"
+          },
+          "appbundle": {
+            "type": "appbundle",
+            "build_mode": "release",
+            "obfuscate": true,
+            "split_debug_info": "build/app/outputs/symbols",
+            "command": "flutter build appbundle --flavor production -t lib/main_production.dart --release --obfuscate --split-debug-info=build/app/outputs/symbols",
+            "output_file": "build/app/outputs/bundle/productionRelease/app-production-release.aab"
+          }
+        }
+      },
+      "ios": {
+        "flavor": "production",
+        "scheme": "production",
+        "bundle_id": "com.example.testingBoilerplate",
+        "app_name": "Marketplace Enterprise",
+        "targets": {
+          "ipa": {
+            "type": "ipa",
+            "build_mode": "release",
+            "obfuscate": true,
+            "split_debug_info": "build/ios/symbols",
+            "command": "flutter build ipa --flavor production -t lib/main_production.dart --release --obfuscate --split-debug-info=build/ios/symbols",
+            "output_dir": "build/ios/ipa"
+          }
+        }
+      }
+    }
+  }
+}
